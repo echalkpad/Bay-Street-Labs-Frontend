@@ -1,0 +1,25 @@
+<nav class="tm-navbar-full">
+    <div class="uk-container uk-container-center">
+        <div class="uk-navbar">
+            <a class="tm-logo uk-navbar-brand" href="/">Test</a>
+            <div>
+                <ul class="uk-navbar-nav uk-hidden-small">
+                    <li class="uk-parent uk-active" data-uk-dropdown="{}" aria-haspopup="true" aria-expanded="false">
+                        <a [routerLink]="['/HomeController']">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="uk-container uk-container-center">
+    <div class="tm-container">
+        <div class="tm-block tm-middle uk-grid uk-grid-divider" data-uk-grid-match data-uk-grid-margin>
+            <div class="tm-main uk-width-medium-3-3">
+                     <section class="tm-block tm-top-b uk-grid uk-grid-divider" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                    <div class="uk-width-1-1"><div class="uk-panel uk-panel-box widget_text">
+                    <router-outlet></router-outlet></div></div></section>
+            </div>
+        </div>
+    </div>
+</div>
