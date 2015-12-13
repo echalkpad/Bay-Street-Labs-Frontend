@@ -3,16 +3,20 @@
         <fieldset>
             <legend>Add a business</legend>
             <div class="uk-form-row">
-                <input type="text" ngControl="name" [(ngModel)]="businessModel.name" placeholder="First Name" #name="ngForm">
+                <input type="text" ngControl="name" [(ngModel)]="businessModel.name" placeholder="Name" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" ngControl="address" [(ngModel)]="businessModel.address" placeholder="Last Name" #name="ngForm">
+                <input type="text" ngControl="address" [(ngModel)]="businessModel.address" placeholder="Address" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" ngControl="phone" [(ngModel)]="businessModel.phone" placeholder="Email" #name="ngForm">
+                <input type="text" ngControl="phone" [(ngModel)]="businessModel.phone" placeholder="Phone" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" ngControl="userId" [(ngModel)]="businessModel.userId" placeholder="User" #name="ngForm">
+                <select required
+                  [(ngModel)]="businessModel.userId"
+                    ngControl="userId" #name="ngForm" >
+                    <option *ngFor="#user of userList" [value]="user.id">{{user.firstName}}, {{user.lastName}}</option>
+                </select>
             </div>
             <div class="uk-form-row">
                 <button class="uk-button" [disabled]="!hf.form.valid" type="submit">Add</button>
@@ -25,7 +29,7 @@
            <li *ngFor="#business of businessList">
                <div class="uk-grid">
                     <div class="uk-width-5-10">
-                        <b>{{ business.name }}, {{business.address}}, {{business.phone}}, {{business.user.firstName}}</b>
+                        <b>{{ business.name }}, {{business.address}}, {{business.phone}} ({{business.user.firstName}}, {{business.user.lastName}})</b>
                     </div>
                 </div>
            </li>

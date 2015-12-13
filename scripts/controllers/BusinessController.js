@@ -10,26 +10,42 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var angular2_1 = require('angular2/angular2');
 var BusinessModel_1 = require('../models/BusinessModel');
+var UserModel_1 = require('../models/UserModel');
 var common_1 = require('angular2/common');
 var BusinessController = (function () {
-    function BusinessController(businessResource) {
+    function BusinessController(businessResource, userResource) {
         this.businessList = [];
+        this.userList = [];
         this.businessModel = new BusinessModel_1.BusinessModel({});
         this.businessResource = businessResource;
+        this.userResource = userResource;
         this.form = new angular2_1.ControlGroup({
             name: new angular2_1.Control('name', angular2_1.Validators.required),
             address: new angular2_1.Control('address', angular2_1.Validators.required),
             phone: new angular2_1.Control('phone', angular2_1.Validators.required),
             userId: new angular2_1.Control('userId', angular2_1.Validators.required)
         });
+        this.refreshUserList();
         this.refreshBusinessList();
     }
     BusinessController.prototype.refreshBusinessList = function () {
         var _this = this;
-        this.businessResource.find()
+        this.businessResource.find({
+            include: ["user"]
+        })
             .then(function (businessList) {
             _this.businessList = businessList;
         });
+    };
+    BusinessController.prototype.refreshUserList = function () {
+        var _this = this;
+        this.userResource.find()
+            .then(function (userList) {
+            _this.userList = userList;
+        });
+    };
+    BusinessController.prototype.ngAfterViewInit = function () {
+        this.refreshUserList();
     };
     BusinessController.prototype.addModel = function () {
         var _this = this;
@@ -44,13 +60,14 @@ var BusinessController = (function () {
     };
     BusinessController = __decorate([
         angular2_1.Component({
-            providers: [BusinessModel_1.BusinessResource]
+            providers: [BusinessModel_1.BusinessResource, UserModel_1.UserResource]
         }),
         angular2_1.View({
             templateUrl: 'scripts/controllers/BusinessController.html',
             directives: [[common_1.FORM_DIRECTIVES]]
         }),
-        __param(0, angular2_1.Inject(BusinessModel_1.BusinessResource))
+        __param(0, angular2_1.Inject(BusinessModel_1.BusinessResource)),
+        __param(1, angular2_1.Inject(UserModel_1.UserResource))
     ], BusinessController);
     return BusinessController;
 })();
