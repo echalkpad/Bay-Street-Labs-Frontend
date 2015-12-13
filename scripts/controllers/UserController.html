@@ -1,18 +1,18 @@
 <div>
-    <form class="uk-form uk-width-medium-1-3">
+    <form class="uk-form uk-width-medium-1-3" [ngFormModel]="form" (ngSubmit)="addModel()" #hf="ngForm">
         <fieldset>
             <legend>Add a user</legend>
             <div class="uk-form-row">
-                <input type="text" [(ngModel)]="userModel.firstName" placeholder="First Name">
+                <input type="text" ngControl="firstName" [(ngModel)]="userModel.firstName" placeholder="First Name" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" [(ngModel)]="userModel.lastName" placeholder="Last Name">
+                <input type="text" ngControl="lastName" [(ngModel)]="userModel.lastName" placeholder="Last Name" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" [(ngModel)]="userModel.email" placeholder="Email">
+                <input type="email" ngControl="email" [(ngModel)]="userModel.email" placeholder="Email" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <button class="uk-button" (click)="addModel()">Add</button>
+                <button class="uk-button" [disabled]="!hf.form.valid" type="submit">Add</button>
             </div>
         </fieldset>
     </form>

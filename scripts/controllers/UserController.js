@@ -16,8 +16,19 @@ var UserController = (function () {
         this.userList = [];
         this.userModel = new UserModel_1.UserModel({});
         this.userResource = userResource;
+        this.form = new angular2_1.ControlGroup({
+            email: new angular2_1.Control('email', this.emailValidator),
+            firstName: new angular2_1.Control('firstName', angular2_1.Validators.required),
+            lastName: new angular2_1.Control('lastName', angular2_1.Validators.required)
+        });
         this.refreshUserList();
     }
+    UserController.prototype.emailValidator = function (control) {
+        var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        if (!EMAIL_REGEXP.test(control.value)) {
+            return { invalidEmail: true };
+        }
+    };
     UserController.prototype.refreshUserList = function () {
         var _this = this;
         this.userResource.find()
