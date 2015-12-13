@@ -9,13 +9,15 @@ var angular2_1 = require('angular2/angular2');
 var router_1 = require('angular2/router');
 var HomeController_1 = require('./controllers/HomeController');
 var UserController_1 = require('./controllers/UserController');
+var BusinessController_1 = require('./controllers/BusinessController');
 var App = (function () {
     function App() {
     }
     App = __decorate([
         router_1.RouteConfig([
             { path: '/', as: 'HomeController', component: HomeController_1.HomeController },
-            { path: '/users', as: 'UserController', component: UserController_1.UserController }
+            { path: '/users', as: 'UserController', component: UserController_1.UserController },
+            { path: '/business', as: 'BusinessController', component: BusinessController_1.BusinessController }
         ]),
         angular2_1.Component({
             selector: 'my-app'

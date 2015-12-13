@@ -5,10 +5,12 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {HomeController} from './controllers/HomeController';
 import {UserController} from './controllers/UserController';
+import {BusinessController} from './controllers/BusinessController';
 
 @RouteConfig([
     { path: '/', as: 'HomeController', component: HomeController },
-    { path: '/users', as: 'UserController', component: UserController }
+    { path: '/users', as: 'UserController', component: UserController },
+    { path: '/business', as: 'BusinessController', component: BusinessController }
 ])
 
 @Component({
