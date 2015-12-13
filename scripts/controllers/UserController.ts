@@ -1,40 +1,45 @@
 ///<reference path="../../bower_components/angular2/angular2.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
-import {UserModel} from '../models/UserModel';
+import {Component, View, Inject} from 'angular2/angular2';
+import {UserModel, UserResource} from '../models/UserModel';
+import {FORM_DIRECTIVES} from 'angular2/common';
 
 @Component({
+    providers: [UserResource]
 })
 
 @View({
-    template: `
-        <div>
-            <form class="uk-form uk-width-medium-1-3">
-                <fieldset>
-                    <legend>Add a user</legend>
-                    <div class="uk-form-row">
-                        <input type="text" name="userModel.firstName" placeholder="First Name">
-                    </div>
-                    <div class="uk-form-row">
-                        <input type="text" name="userModel.lastName" placeholder="Last Name">
-                    </div>
-                    <div class="uk-form-row">
-                        <input type="text" name="userModel.email" placeholder="Email">
-                    </div>
-                    <div class="uk-form-row">
-                        <button class="uk-button">Add</button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    `,
-    directives: []
+    templateUrl: 'scripts/controllers/UserController.html',
+    directives: [[FORM_DIRECTIVES]]
 })
 
 export class UserController {
     userModel: UserModel;
+    userResource: UserResource;
+    userList: Array<UserModel> = [];
 
-    constructor() {
+    constructor(@Inject(UserResource) userResource: UserResource) {
         this.userModel = new UserModel({});
+        this.userResource = userResource;
+
+        this.refreshUserList();
+    }
+
+    refreshUserList() {
+        this.userResource.find()
+            .then(userList => {
+                this.userList = userList;
+            });
+    }
+
+    addModel() {
+        this.userResource.upsert(this.userModel)
+            .then(res => {
+                this.userModel = new UserModel({});
+                this.refreshUserList();
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 }

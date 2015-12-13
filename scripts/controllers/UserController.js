@@ -5,18 +5,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var angular2_1 = require('angular2/angular2');
 var UserModel_1 = require('../models/UserModel');
+var common_1 = require('angular2/common');
 var UserController = (function () {
-    function UserController() {
+    function UserController(userResource) {
+        this.userList = [];
         this.userModel = new UserModel_1.UserModel({});
+        this.userResource = userResource;
+        this.refreshUserList();
     }
-    UserController = __decorate([
-        angular2_1.Component({}),
-        angular2_1.View({
-            template: "\n        <div>\n            <form class=\"uk-form uk-width-medium-1-3\">\n                <fieldset>\n                    <legend>Add a user</legend>\n                    <div class=\"uk-form-row\">\n                        <input type=\"text\" name=\"userModel.firstName\" placeholder=\"First Name\">\n                    </div>\n                    <div class=\"uk-form-row\">\n                        <input type=\"text\" name=\"userModel.lastName\" placeholder=\"Last Name\">\n                    </div>\n                    <div class=\"uk-form-row\">\n                        <input type=\"text\" name=\"userModel.email\" placeholder=\"Email\">\n                    </div>\n                    <div class=\"uk-form-row\">\n                        <button class=\"uk-button\">Add</button>\n                    </div>\n                </fieldset>\n            </form>\n        </div>\n    ",
-            directives: []
+    UserController.prototype.refreshUserList = function () {
+        var _this = this;
+        this.userResource.find()
+            .then(function (userList) {
+            _this.userList = userList;
+        });
+    };
+    UserController.prototype.addModel = function () {
+        var _this = this;
+        this.userResource.upsert(this.userModel)
+            .then(function (res) {
+            _this.userModel = new UserModel_1.UserModel({});
+            _this.refreshUserList();
         })
+            .catch(function (err) {
+            console.log(err);
+        });
+    };
+    UserController = __decorate([
+        angular2_1.Component({
+            providers: [UserModel_1.UserResource]
+        }),
+        angular2_1.View({
+            templateUrl: 'scripts/controllers/UserController.html',
+            directives: [[common_1.FORM_DIRECTIVES]]
+        }),
+        __param(0, angular2_1.Inject(UserModel_1.UserResource))
     ], UserController);
     return UserController;
 })();

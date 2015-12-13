@@ -1,0 +1,30 @@
+<div>
+    <form class="uk-form uk-width-medium-1-3">
+        <fieldset>
+            <legend>Add a user</legend>
+            <div class="uk-form-row">
+                <input type="text" [(ngModel)]="userModel.firstName" placeholder="First Name">
+            </div>
+            <div class="uk-form-row">
+                <input type="text" [(ngModel)]="userModel.lastName" placeholder="Last Name">
+            </div>
+            <div class="uk-form-row">
+                <input type="text" [(ngModel)]="userModel.email" placeholder="Email">
+            </div>
+            <div class="uk-form-row">
+                <button class="uk-button" (click)="addModel()">Add</button>
+            </div>
+        </fieldset>
+    </form>
+    <hr />
+    <h3>Users List</h3>
+    <ul class="uk-list uk-list-line uk-list-striped">
+           <li *ngFor="#user of userList">
+               <div class="uk-grid">
+                    <div class="uk-width-5-10">
+                        <b>{{ user.firstName }}, {{user.lastName}} ({{user.email}})</b>
+                    </div>
+                </div>
+           </li>
+        </ul>
+</div>
