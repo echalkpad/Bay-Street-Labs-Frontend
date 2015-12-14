@@ -14,9 +14,9 @@ import {Component, View} from 'angular2/angular2';
 
             <p>Backend is node.js application using Loopback.IO framework. Served by Nginx proxy and "forever" as application runner backed by MongoDB database</p>
 
-            <p><a href="http://..../explorer" target=_blank>Api Explorer</a> - Browsser based API client</p>
+            <p><a href="https://api.webit.work/explorer/" target=_blank>Api Explorer</a> - Browsser based API client</p>
 
-            <p>Everything is hosted at AWS</p>
+            <p>Everything is hosted at AWS, Behind Cloud Flare hosting with enabled HTTPS</p>
         </div>
     `,
     directives: []
