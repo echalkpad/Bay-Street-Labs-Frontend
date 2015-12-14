@@ -1,8 +1,8 @@
 var Config = (function () {
     function Config() {
         this.apiUrl = 'http://192.168.56.55:3000';
-        if (window.location.host === 'torontoit.work') {
-            this.apiUrl = 'https://api.torontoit.work';
+        if (window.location.host === 'webit.work') {
+            this.apiUrl = 'https://api.webit.work';
         }
         if (window.location.host === '192.168.56.55:8080') {
             this.apiUrl = 'http://192.168.56.55:3000';
