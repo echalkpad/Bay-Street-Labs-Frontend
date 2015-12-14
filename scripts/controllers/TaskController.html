@@ -1,21 +1,23 @@
 <div>
     <form class="uk-form uk-width-medium-1-3" [ngFormModel]="form" (ngSubmit)="addModel()" #hf="ngForm">
         <fieldset>
-            <legend>Add a business</legend>
+            <legend>Add a task</legend>
             <div class="uk-form-row">
-                <input type="text" ngControl="name" [(ngModel)]="businessModel.name" placeholder="Name" #name="ngForm">
+                <input type="text" ngControl="name" [(ngModel)]="taskModel.name" placeholder="Name" #name="ngForm">
             </div>
             <div class="uk-form-row">
-                <input type="text" ngControl="address" [(ngModel)]="businessModel.address" placeholder="Address" #name="ngForm">
-            </div>
-            <div class="uk-form-row">
-                <input type="text" ngControl="phone" [(ngModel)]="businessModel.phone" placeholder="Phone" #name="ngForm">
+                <div>Completed:</div>
+                <select required
+                  [(ngModel)]="taskModel.completed"
+                    ngControl="completed" #name="ngForm" >
+                    <option *ngFor="#completeOption of completeList" [value]="completeOption.id">{{completeOption.name}}</option>
+                </select>
             </div>
             <div class="uk-form-row">
                 <div>User:</div>
                 <select required
-                  [(ngModel)]="businessModel.userId"
-                    ngControl="userId" #name="ngForm" >
+                  [(ngModel)]="taskModel.assignedId"
+                    ngControl="assignedId" #name="ngForm" >
                     <option *ngFor="#user of userList" [value]="user.id">{{user.firstName}}, {{user.lastName}}</option>
                 </select>
             </div>
@@ -25,12 +27,12 @@
         </fieldset>
     </form>
     <hr />
-    <h3>Business List</h3>
+    <h3>Task List</h3>
     <ul class="uk-list uk-list-line uk-list-striped">
-           <li *ngFor="#business of businessList">
+           <li *ngFor="#task of taskList">
                <div class="uk-grid">
                     <div class="uk-width-5-10">
-                        <b>{{ business.name }}, {{business.address}}, {{business.phone}} ({{business.user.firstName}}, {{business.user.lastName}})</b>
+                        <b>{{ task.name }}, {{task.completed}} ({{task.assigned.firstName}}, {{task.assigned.lastName}})</b>
                     </div>
                 </div>
            </li>

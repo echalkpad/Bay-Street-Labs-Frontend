@@ -10,6 +10,7 @@ var router_1 = require('angular2/router');
 var HomeController_1 = require('./controllers/HomeController');
 var UserController_1 = require('./controllers/UserController');
 var BusinessController_1 = require('./controllers/BusinessController');
+var TaskController_1 = require('./controllers/TaskController');
 var App = (function () {
     function App() {
     }
@@ -17,7 +18,8 @@ var App = (function () {
         router_1.RouteConfig([
             { path: '/', as: 'HomeController', component: HomeController_1.HomeController },
             { path: '/users', as: 'UserController', component: UserController_1.UserController },
-            { path: '/business', as: 'BusinessController', component: BusinessController_1.BusinessController }
+            { path: '/business', as: 'BusinessController', component: BusinessController_1.BusinessController },
+            { path: '/task', as: 'TaskController', component: TaskController_1.TaskController }
         ]),
         angular2_1.Component({
             selector: 'my-app'

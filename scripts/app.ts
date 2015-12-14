@@ -6,11 +6,13 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {HomeController} from './controllers/HomeController';
 import {UserController} from './controllers/UserController';
 import {BusinessController} from './controllers/BusinessController';
+import {TaskController} from './controllers/TaskController';
 
 @RouteConfig([
     { path: '/', as: 'HomeController', component: HomeController },
     { path: '/users', as: 'UserController', component: UserController },
-    { path: '/business', as: 'BusinessController', component: BusinessController }
+    { path: '/business', as: 'BusinessController', component: BusinessController },
+    { path: '/task', as: 'TaskController', component: TaskController }
 ])
 
 @Component({
